@@ -9,7 +9,7 @@
 <body>
     <div class="Content">
 
-    <h1>Secret Santa YTLGDK 2020</h1>
+    <h1>Secret Santa YTLGDK 2021</h1>
     <p>Hej venner, vælg jeres navn i menuen under for at få tildelt en nisse</p>
     <p>som i så skal sende en lil bit gave til :) </p>
 
@@ -42,7 +42,7 @@
                 console.log(name);
                 console.log(myJSON);
 
-                let fetchK = await fetch('http://localhost:3000/submit', { 
+                let fetchK = await fetch('http://localhost:500/submit', {
                     method: 'POST',
                     headers: {
                     'Content-Type': 'application/json',},
