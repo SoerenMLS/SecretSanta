@@ -9,15 +9,26 @@
         <h1>Welcome to the secret santa webapp</h1>
         <p>Enter your name, address & e-mail in the boxes below</p>
         <p>When everyone has joined the pool, you'll get designated a secret santa & someone you need to give a gift</p>
-        <form>
-            <label for="name">Name</label>
-            <input type="text" id="name">
-            <label for="address">Address</label>
-            <input type="text" id="address">
-            <label for="name">E-mail</label>
-            <input type="text" id="email">
-            <button type="button" id="button1">Submit</button>
-        </form>
+        {% block content %}
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+            <p>
+                {{ form.name.label }}
+                {{ form.name }}
+            </p>
+            <p>
+                {{ form.address.label }}
+                {{ form.address }}
+            </p>
+            <p>
+                {{ form.email.label }}
+                {{ form.email }}
+            </p>
+            <p>
+                {{ form.submit() }}
+            </p>
+            </form>
+        {% endblock %}
     </div>
 </body>
 </html>
