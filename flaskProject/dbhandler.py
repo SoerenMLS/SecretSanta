@@ -19,4 +19,5 @@ def reg_user(name, email, address):
                 cursor.execute("INSERT INTO users VALUES (?, ?, ?, ?)", (name, email, address, userid))
 
     print(f"added {name} to the db")
+    return userid
 

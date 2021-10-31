@@ -8,3 +8,8 @@ class RegistrationForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()])
     email = StringField('E-Mail', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+class JoinForm(FlaskForm):
+    invitation = StringField('Invitation', validators=[DataRequired()])
+    submit = SubmitField('Join')

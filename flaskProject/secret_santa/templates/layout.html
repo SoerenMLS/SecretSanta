@@ -6,11 +6,11 @@
         {% if messages %}
         <ul class=flashes>
         {% for message in messages %}
-            <li>{{ message }}</li>
+            <h2 style="text-align:center">{{ message }}</h2>
         {% endfor %}
         </ul>
-  {% endif %}
-{% endwith %}
+        {% endif %}
+    {% endwith %}
 </head>
 {% block body %}{% endblock %}
 
