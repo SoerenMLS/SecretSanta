@@ -21,3 +21,11 @@ def reg_user(name, email, address):
     print(f"added {name} to the db")
     return userid
 
+
+def get_user(user_id):
+    with closing(sqlite3.connect(dbpath)) as dbconnection:
+        with dbconnection:
+            with closing(dbconnection.cursor()) as cursor:
+                user = cursor.execute("SELECT * FROM users WHERE id = (?)", (user_id,)).fetchone()
+    print(user)
+    return user
