@@ -2,6 +2,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Secret Santa</title>
+</head>
+{% if name %}
+<div style="background: darksalmon"><p>Welcome back {{ name }}!</p></div>
+{% endif %}
     {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul class=flashes>
@@ -11,7 +15,6 @@
         </ul>
         {% endif %}
     {% endwith %}
-</head>
-<div><p>Welcome {{ name }}!</p></div>
 {% block body %}{% endblock %}
+<script type="text/javascript" src={{ url_for('static', filename="script.js") }}></script>
 
