@@ -1,5 +1,5 @@
 import http.client
-
+from santahandler import generate_session
 from flask import render_template, flash, redirect, request, make_response
 from secret_santa import app
 from secret_santa.forms import RegistrationForm, JoinForm
@@ -47,6 +47,8 @@ def session(session_id):
 @app.route('/generate', methods=['POST'])
 def generate():
     if request.method == 'POST':
-        return redirect('/session/1')
+        user_id = get_user(request.cookies.get('userid'))
+        sessionid = generate_session(user_id)
+        return redirect(f'/session/{sessionid}')
 
     return 'bad request', 400

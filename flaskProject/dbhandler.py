@@ -16,7 +16,7 @@ def reg_user(name, email, address):
     with closing(sqlite3.connect(dbpath)) as dbconnection:
         with dbconnection:
             with closing(dbconnection.cursor()) as cursor:
-                cursor.execute("INSERT INTO users (name, adress, email, id) VALUES (?, ?, ?, ?)", (name, email, address, userid))
+                cursor.execute("INSERT INTO users (name, address, email, id) VALUES (?, ?, ?, ?)", (name, email, address, userid))
 
     print(f"added {name} to the db")
     return userid
@@ -29,3 +29,17 @@ def get_user(user_id):
                 user = cursor.execute("SELECT * FROM users WHERE id = (?)", (user_id,)).fetchone()
     print(user)
     return user
+
+
+def reg_session(session_id):
+    with closing(sqlite3.connect(dbpath)) as dbconnection:
+        with dbconnection:
+            with closing(dbconnection.cursor()) as cursor:
+                cursor.execute("INSERT INTO session VALUES (?)", (session_id,))
+
+
+def add_user_to_session(user_id, session_id):
+    with closing(sqlite3.connect(dbpath)) as dbconnection:
+        with dbconnection:
+            with closing(dbconnection.cursor()) as cursor:
+                cursor.execute("INSERT INTO user_sessions VALUES (?, ?)", (user_id, session_id))
