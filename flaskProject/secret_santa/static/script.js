@@ -1,14 +1,16 @@
 let generate_invitation = async () => {
-    let cookie = document.cookie.split('=');
+    let cookie = document.cookie.split('=')[1];
+    let uidJson = JSON.stringify( {
+        'userid': cookie
+    });
+    console.log(uidJson);
 
     await fetch('http://localhost:5000/generate',{
         headers:{
             'Content-Type':'application/json',
         },
         method: 'POST',
-        body: {
-            userid: JSON.stringify(cookie[1]),
-        },
+        body: uidJson,
         redirect: "follow"
     }).then(response => {
         if(response.redirected) {

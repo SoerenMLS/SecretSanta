@@ -47,8 +47,8 @@ def session(session_id):
 @app.route('/generate', methods=['POST'])
 def generate():
     if request.method == 'POST':
-        user_id = get_user(request.cookies.get('userid'))
-        sessionid = generate_session(user_id)
+        request_json = request.json
+        sessionid = generate_session(request_json['userid'])
         return redirect(f'/session/{sessionid}')
 
     return 'bad request', 400
