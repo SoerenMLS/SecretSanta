@@ -4,6 +4,7 @@ from flask import render_template, flash, redirect, request, make_response
 from secret_santa import app
 from secret_santa.forms import RegistrationForm, JoinForm
 from dbhandler import reg_user, get_user
+from secret_santa.tables import table
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -40,8 +41,8 @@ def secret_santa():
 
 @app.route('/session/<session_id>')
 def session(session_id):
-    return session_id
-    pass
+    user = get_user(request.cookies.get('userid'))
+    return render_template('session.html', table=table, name=user[0], session_name = session_id)
 
 
 @app.route('/generate', methods=['POST'])

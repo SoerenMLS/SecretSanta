@@ -9,3 +9,7 @@ def generate_session(user_id):
     reg_session(session_id)
     add_user_to_session(user_id, session_id)
     return session_id
+
+
+def join_session(user_id, session):
+    pass

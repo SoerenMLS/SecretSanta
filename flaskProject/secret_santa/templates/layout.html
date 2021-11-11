@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Secret Santa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename="styles.css") }}">
 </head>
 {% if name %}
 <div style="background: darksalmon"><p>Welcome back {{ name }}!</p></div>
@@ -17,4 +18,5 @@
     {% endwith %}
 {% block body %}{% endblock %}
 <script type="text/javascript" src={{ url_for('static', filename="script.js") }}></script>
+
 
