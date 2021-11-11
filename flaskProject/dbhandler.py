@@ -43,3 +43,15 @@ def add_user_to_session(user_id, session_id):
         with dbconnection:
             with closing(dbconnection.cursor()) as cursor:
                 cursor.execute("INSERT INTO user_sessions VALUES (?, ?)", (user_id, session_id))
+
+
+def session_exists(session_id):
+    with closing(sqlite3.connect(dbpath)) as dbconnection:
+        with dbconnection:
+            with closing(dbconnection.cursor()) as cursor:
+                val = cursor.execute("SELECT EXISTS(SELECT 1 FROM session WHERE session_id = (?))", (session_id,)).fetchone()
+
+    if val[0] == 1:
+        return True
+    else:
+        return False

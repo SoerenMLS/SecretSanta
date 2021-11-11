@@ -13,3 +13,8 @@ def generate_session(user_id):
 
 def join_session(user_id, session):
     pass
+
+
+def get_participants(session_id):
+    pass
+

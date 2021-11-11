@@ -3,7 +3,7 @@ from santahandler import generate_session
 from flask import render_template, flash, redirect, request, make_response
 from secret_santa import app
 from secret_santa.forms import RegistrationForm, JoinForm
-from dbhandler import reg_user, get_user
+from dbhandler import reg_user, get_user, session_exists
 from secret_santa.tables import table
 
 
@@ -32,7 +32,7 @@ def secret_santa():
     user = get_user(request.cookies.get('userid'))
     form = JoinForm()
     if form.validate_on_submit():
-        return "OMEGALUL"
+        return redirect(f'/session/{form.invitation.data}')
     elif request.method == 'POST':
         print(request.json)
 
@@ -41,8 +41,12 @@ def secret_santa():
 
 @app.route('/session/<session_id>')
 def session(session_id):
-    user = get_user(request.cookies.get('userid'))
-    return render_template('session.html', table=table, name=user[0], session_name = session_id)
+    if session_exists(session_id):
+        user = get_user(request.cookies.get('userid'))
+        return render_template('session.html', table=table, name=user[0], session_name=session_id)
+
+    flash(f"session: '{session_id}' does not exist")
+    return redirect('/secretsanta')
 
 
 @app.route('/generate', methods=['POST'])
