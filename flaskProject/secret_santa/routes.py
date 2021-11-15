@@ -1,5 +1,4 @@
-import http.client
-from santahandler import generate_session
+from santahandler import generate_session, join_session, get_session
 from flask import render_template, flash, redirect, request, make_response
 from secret_santa import app
 from secret_santa.forms import RegistrationForm, JoinForm
@@ -32,7 +31,11 @@ def secret_santa():
     user = get_user(request.cookies.get('userid'))
     form = JoinForm()
     if form.validate_on_submit():
-        return redirect(f'/session/{form.invitation.data}')
+        joined_session = join_session(user, form.invitation.data)
+        if joined_session:
+            return redirect(f'/session/{joined_session}')
+        else:
+            flash(f"I'm sorry but you're not invited to this session")
     elif request.method == 'POST':
         print(request.json)
 
@@ -43,7 +46,10 @@ def secret_santa():
 def session(session_id):
     if session_exists(session_id):
         user = get_user(request.cookies.get('userid'))
-        return render_template('session.html', table=table, name=user[0], session_name=session_id)
+        print(user)
+        current_session = get_session(session_id)
+        flash(f"session invitation is: {current_session.invitation}")
+        return render_template('session.html', table=table, session_name=session_id)
 
     flash(f"session: '{session_id}' does not exist")
     return redirect('/secretsanta')
@@ -53,7 +59,8 @@ def session(session_id):
 def generate():
     if request.method == 'POST':
         request_json = request.json
-        sessionid = generate_session(request_json['userid'])
-        return redirect(f'/session/{sessionid}')
+        generated_session = generate_session(request_json['userid'])
+        return redirect(f'/session/{generated_session.session_id}')
 
     return 'bad request', 400
+
