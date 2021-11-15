@@ -2,3 +2,4 @@ flaskProject/database/users.db
 /.idea
 flaskProject/.idea/
 flaskProject/database/users.db
+*.db
