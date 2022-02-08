@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div style="text-align: center">
+        <h1>Hello {{ name }} you have joined the {{ session_name }} secret santa-session</h1>
+        <p>Once everyone has joined the session, the session owner will have the ability to roll a
+            secret santa for each participant.
+        </p>
+        <p>Once the santas have been rolled
+            you will receive an e-mail with the address and name for whom you have to send a gift <b>remember to check spam!</b>
+        </p>
+    </div>
+    <div id="participantDiv">
+        {{ table }}
+    </div>
+{% endblock %}

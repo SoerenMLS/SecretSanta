@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div style="text-align: center">
+        <h1>Welcome {{ name }} to the secret santa webapp</h1>
+        <p>Enter your name, address & e-mail in the boxes below</p>
+        <p>When everyone has joined the pool, you'll get designated a secret santa & someone you need to give a gift</p>
+        {% block content %}
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+            <p>
+                {{ form.name.label }}
+                {{ form.name }}
+            </p>
+            <p>
+                {{ form.address.label }}
+                {{ form.address }}
+            </p>
+            <p>
+                {{ form.email.label }}
+                {{ form.email  }}
+            </p>
+            <p>
+                {{ form.submit() }}
+            </p>
+            </form>
+        {% endblock %}
+        <p><b>BY CLICKING SUBMIT YOU AGREE TO USE COOKIES WITH THIS WEBSITE</b></p>
+    </div>
+{% endblock %}
